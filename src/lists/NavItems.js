@@ -1,10 +1,7 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
 
-const NavItems = ({ header, Icon, handleSelect }) => {
-  const handleClick = (selectedItem) => {
-    handleSelect(selectedItem);
-  };
+const NavItems = ({ header, Icon }) => {
   return (
     <Box
       display={"flex"}
@@ -12,9 +9,6 @@ const NavItems = ({ header, Icon, handleSelect }) => {
       gap={2}
       sx={{
         cursor: "pointer",
-      }}
-      onClick={() => {
-        handleClick(header);
       }}
     >
       <Icon color="primary" />

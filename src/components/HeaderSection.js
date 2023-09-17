@@ -15,18 +15,24 @@ import React, { useState } from "react";
 import { ArrowDownward, KeyboardArrowDown } from "@mui/icons-material";
 import Person2Icon from "@mui/icons-material/Person2";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import AllBadges from "@/lists/AllBadges";
 
-const HeaderSection = () => {
+const HeaderSection = ({ open, setOpen }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [openMenu, setOpenMenu] = useState(true);
-  const open = Boolean(anchorEl);
+  const openAnchor = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleClickBurger = () => {
+    setOpen(!open);
+  };
+
   return (
     <Box
       display={"flex"}
@@ -36,11 +42,30 @@ const HeaderSection = () => {
       alignItems={"center"}
       px={2}
     >
+      <Box py={{ xs: 1, sm: 1 }} display={"flex"} gap={4}>
+        <Typography
+          sx={{
+            fontSize: "23px",
+            marginLeft: "8px",
+            color: "white",
+            display: { xs: "none", md: "flex" },
+            //   fontFamily: "poppins",
+          }}
+        >
+          WEFRAME
+        </Typography>
+        <MenuIcon
+          sx={{ marginTop: 0.5, cursor: "pointer" }}
+          fontSize="medium"
+          color="primary"
+          onClick={handleClickBurger}
+        />
+      </Box>
       <Box display={"flex"} ml={{ xs: 2, sm: 2 }}>
         <input
           type="text"
           style={{
-            width: "300px",
+            width: "200px",
             padding: "10px",
             borderRadius: "20px",
             backgroundColor: "#211a75",
@@ -74,9 +99,9 @@ const HeaderSection = () => {
             paddingX: 2,
           }}
           id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
+          aria-controls={openAnchor ? "basic-menu" : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
+          aria-expanded={openAnchor ? "true" : undefined}
           onClick={handleClick}
           endIcon={<KeyboardArrowDown />}
         >
@@ -85,7 +110,7 @@ const HeaderSection = () => {
         <Menu
           id="basic-menu"
           anchorEl={anchorEl}
-          open={open}
+          open={openAnchor}
           onClose={handleClose}
           MenuListProps={{
             "aria-labelledby": "basic-button",

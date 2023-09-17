@@ -19,7 +19,7 @@ export default function Home() {
         width={"100%"}
         // bgcolor={"blue"}
       >
-        <HeaderSection />
+        <HeaderSection open={open} setOpen={setOpen} />
         <Box py={2} px={2} bgcolor={"#0d0b21"} minHeight={"100vh"}>
           <HeroSection />
           <CardsSection />

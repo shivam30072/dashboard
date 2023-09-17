@@ -8,7 +8,6 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import GridViewIcon from "@mui/icons-material/GridView";
 import AutoStoriesIcon from "@mui/icons-material/AutoStories";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import MenuIcon from "@mui/icons-material/Menu";
 import NavItems from "../lists/NavItems";
 import FooterCard from "./FooterCard";
 
@@ -56,20 +55,15 @@ const navItems = [
   },
 ];
 
-const Navbar = ({ open, setOpen }) => {
-  const handleClickBurger = () => {
-    setOpen(!open);
-  };
-
-  const handleSelect = (selectedItem) => {};
+const Navbar = ({ open }) => {
   return (
     <>
-      {open ? (
+      {open && (
         <Box
           color={"white"}
           bgcolor={"#15132b"}
-          // display={{ xs: "none", md: "flex" }}
-          display={"flex"}
+          display={{ xs: open ? "flex" : "none", md: "flex" }}
+          // display={"flex"}
           flexDirection={"column"}
           borderRight={"2px solid #1f1f24"}
           height={"100%"}
@@ -83,58 +77,18 @@ const Navbar = ({ open, setOpen }) => {
             pb={1}
             borderBottom={"2px solid #1f1f24"}
             display={"flex"}
-          >
-            <Box py={{ xs: 1, sm: 1 }} display={"flex"} gap={4}>
-              <Typography
-                sx={{
-                  fontSize: "23px",
-                  marginLeft: "8px",
-                  //   fontFamily: "poppins",
-                }}
-              >
-                WEFRAME
-              </Typography>
-              <MenuIcon
-                sx={{ marginTop: 0.5, cursor: "pointer" }}
-                fontSize="medium"
-                color="primary"
-                onClick={handleClickBurger}
-              />
-            </Box>
-          </Box>
+          ></Box>
           <Box mt={2} pl={2}>
             <Typography fontSize={12} letterSpacing={1} mb={2}>
               MAIN MENU
             </Typography>
             {navItems.map((item) => (
-              <NavItems
-                key={item.id}
-                header={item.header}
-                Icon={item.icon}
-                handleSelect={handleSelect}
-              />
+              <NavItems key={item.id} header={item.header} Icon={item.icon} />
             ))}
           </Box>
           <Box mt={30}>
             <FooterCard />
           </Box>
-        </Box>
-      ) : (
-        <Box
-          height={{ xs: "10vh", sm: "11.5vh" }}
-          bgcolor={"#15132b"}
-          display={{ xs: "flex", sm: "flex" }}
-        >
-          <MenuIcon
-            fontSize="medium"
-            sx={{
-              marginTop: { xs: 3, sm: 3 },
-              cursor: "pointer",
-              marginLeft: 2,
-            }}
-            color="primary"
-            onClick={handleClickBurger}
-          />
         </Box>
       )}
     </>
